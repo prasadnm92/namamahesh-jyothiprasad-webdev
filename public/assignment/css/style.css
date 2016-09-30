@@ -3,5 +3,45 @@ input.form-control {
 }
 
 body {
-    padding-top: 36px;
+    padding-top: 65px;
+}
+
+.stickyheader-title {
+    font-size: x-large;
+}
+
+.stickyheader-align-right {
+    margin-right: 15px;
+}
+
+.stickyheader-align-left {
+    margin-left: 15px;
+}
+
+.user-pages-theme {
+    color: white;
+    background-color: #2196f3;
+    border-color: #1e88e5;
+}
+
+.website-pages-theme {
+    color: white;
+    background-color: #8bc34a;
+    border-color: #7cb342;
+}
+
+.page-pages-theme {
+    color: white;
+    background-color: #e53935;
+    border-color: #d32f2f;
+}
+
+.widget-pages-theme {
+    color: white;
+    background-color: #ff9800;
+    border-color: #fb8c00;
+}
+
+.icon-links {
+    color: black;
 }
