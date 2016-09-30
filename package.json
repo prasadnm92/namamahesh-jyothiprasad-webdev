@@ -1,5 +1,5 @@
 {
-  "name": "web-dev",
+  "name": "namamahesh-jyothiprasad-webdev",
   "version": "1.0.0",
   "description": "Web Dev at Northeastern University",
   "main": "server.js",
@@ -13,6 +13,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "Jose G. Annunziato",
+  "author": "Jyothi Prasad Nama Mahesh",
   "license": "ISC"
 }
