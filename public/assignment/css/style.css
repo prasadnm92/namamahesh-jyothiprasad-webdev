@@ -51,6 +51,24 @@ body {
     color: black;
 }
 
+.object-underlay {
+    position: relative
+}
+
+.object-overlay {
+    position: absolute;
+    padding-right: 0px;
+    top: 0px;
+    right: 0px;
+    z-index: 10;
+    background-color: white;
+}
+
+.video-responsive {
+    width: 100%;
+    height: auto;
+}
+
 .v-divider{
     margin-left:5px;
     margin-right:5px;
