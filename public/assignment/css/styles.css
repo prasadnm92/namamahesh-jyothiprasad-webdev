@@ -19,8 +19,13 @@ body {
     margin-right: 15px;
 }
 
-.leftnav-header {
+.left-navheader {
     padding-left: 0px;
+}
+
+.right-navheader {
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .stickyheader-align-left {
