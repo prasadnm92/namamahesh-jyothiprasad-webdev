@@ -1,5 +1,5 @@
 <nav class="navbar navbar-header navbar-fixed-top user-pages-theme">
-    <a class="navbar-brand user-pages-theme stickyheader-title" href="#">
+    <a class="navbar-brand user-pages-theme stickyheader-title" href="#/user/{{model.user._id}}">
         Profile
     </a>
     <div class="navbar-text pull-right stickyheader-align-right">
@@ -37,7 +37,7 @@
     </form>
 
     <a class="btn website-pages-theme btn-block"
-       ng-click="model.listWebsites();">Websites</a>
+       href="#/user/{{model.user._id/website}}">Websites</a>
     <a class="btn btn-danger btn-block"
        href="#/login">Logout</a>
 </div>

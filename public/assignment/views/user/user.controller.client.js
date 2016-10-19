@@ -9,7 +9,7 @@
         .controller("ProfileController", ProfileController);
 
     function LoginController($location, UserService) {
-        UserService.logAllUsers();
+        UserService.logAllUsers(); //TO DO: remove this!!!
         var vm = this;
         vm.login = login;
 
@@ -45,7 +45,7 @@
         }
     }
 
-    function ProfileController($location, $routeParams, UserService) {
+    function ProfileController($routeParams, UserService) {
         var vm = this;
         vm.updateProfile = updateProfile;
         vm.listWebsites = listWebsites;
@@ -54,7 +54,7 @@
         if(user) {
             vm.user = user;
         }
-        console.log(vm.user);
+        console.log(vm.user); //TO DO: remove this!!!
 
         function updateProfile() {
             vm.success = null;
@@ -63,10 +63,6 @@
                 vm.success = "Successfully Updated";
             }
             else vm.error = "Could not update";
-        }
-
-        function listWebsites() {
-            $location.url('user/'+vm.user._id+'/website');
         }
     }
 })();
