@@ -48,6 +48,9 @@
         </div>
 
         <div class="col-sm-8">
+            <div ng-show="model.error" class="alert alert-danger" role="alert">
+                {{model.error}}
+            </div>
             <form>
                 <div class="form-group">
                     <label for="website-title">Title</label>
