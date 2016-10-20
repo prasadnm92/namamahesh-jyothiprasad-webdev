@@ -1,15 +1,15 @@
 <nav class="navbar navbar-header navbar-fixed-top page-pages-theme">
     <div class="row container-fluid">
         <div class="navbar-text pull-left stickyheader-align-left">
-            <a href="website-list.html" class="navbar-link">
+            <a href="#/user/{{model.userId}}/website" class="navbar-link">
                 <span class="glyphicon glyphicon-chevron-left page-pages-theme"></span>
             </a>
         </div>
-        <a class="navbar-brand page-pages-theme stickyheader-title" href="#">
+        <a class="navbar-brand page-pages-theme stickyheader-title" href="#/user/{{model.userId}}/website/{{websiteId}}/page">
             Pages
         </a>
         <div class="navbar-text pull-right stickyheader-align-right">
-            <a href="page-new.html" class="navbar-link">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/new" class="navbar-link">
                 <span class="glyphicon glyphicon-plus page-pages-theme"></span>
             </a>
         </div>
@@ -17,42 +17,22 @@
 </nav>
 
 <div class="container-fluid">
-    <p>
-        <a href="widget-list.html">Blog Post</a>
-        <a href="page-edit.html">
-            <span class="glyphicon glyphicon-cog pull-right icon-links"></span>
-        </a>
-    </p>
-    <p>
-        <a href="widget-list.html">Blogs</a>
-        <a href="page-edit.html">
-            <span class="glyphicon glyphicon-cog pull-right icon-links"></span>
-        </a>
-    </p>
-    <p>
-        <a href="widget-list.html">Home</a>
-        <a href="page-edit.html">
-            <span class="glyphicon glyphicon-cog pull-right icon-links"></span>
-        </a>
-    </p>
-    <p>
-        <a href="widget-list.html">About</a>
-        <a href="page-edit.html">
-            <span class="glyphicon glyphicon-cog pull-right icon-links"></span>
-        </a>
-    </p>
-    <p>
-        <a href="widget-list.html">Contact Us</a>
-        <a href="page-edit.html">
-            <span class="glyphicon glyphicon-cog pull-right icon-links"></span>
-        </a>
-    </p>
+    <ul class="list-group">
+        <li ng-repeat="page in model.pages" class="list-group-item">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget">
+                {{page.name}}
+            </a>
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}">
+                <span class="glyphicon glyphicon-cog pull-right icon-links"></span>
+            </a>
+        </li>
+    </ul>
 </div>
 
 
 <nav class="navbar navbar-fixed-bottom page-pages-theme">
     <div class="navbar-text pull-right stickyheader-align-right">
-        <a href="profile.html" class="navbar-link">
+        <a href="#/user/{{model.userId}}" class="navbar-link">
             <span class="glyphicon glyphicon-user page-pages-theme"></span>
         </a>
     </div>
