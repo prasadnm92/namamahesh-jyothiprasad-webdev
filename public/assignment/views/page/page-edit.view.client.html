@@ -48,6 +48,9 @@
         </div>
 
         <div class="col-sm-8">
+            <div ng-show="model.error" class="alert alert-danger" role="alert">
+                {{model.error}}
+            </div>
             <form>
                 <div class="form-group">
                     <label for="page-name">Name</label>
@@ -67,7 +70,7 @@
 
 <nav class="navbar navbar-fixed-bottom page-pages-theme">
     <div class="navbar-text pull-right stickyheader-align-right">
-        <a href="#/user/{{model.userId}}/website/{{websiteId}}/page" class="navbar-link">
+        <a href="#/user/{{model.userId}}" class="navbar-link">
             <span class="glyphicon glyphicon-user page-pages-theme"></span>
         </a>
     </div>

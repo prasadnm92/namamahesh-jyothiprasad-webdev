@@ -23,8 +23,9 @@
         vm.createPage = createPage;
 
         function createPage() {
+            vm.error = null;
             if(!PageService.createPage(vm.websiteId, vm.page)) {
-                vm.error = "Page with this title already exists"
+                vm.error = "Page with this name already exists"
             }
             if(!vm.error) $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
         }

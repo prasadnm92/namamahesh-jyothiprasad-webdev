@@ -21,8 +21,9 @@
         vm.createWebsite = createWebsite;
 
         function createWebsite() {
+            vm.error = null;
             if(!WebsiteService.createWebsite(vm.userId, vm.website)) {
-                vm.error = "Website with this title already exists";
+                vm.error = "Website with this name already exists";
             }
             if(!vm.error) $location.url("/user/"+vm.userId+"/website");
         }
