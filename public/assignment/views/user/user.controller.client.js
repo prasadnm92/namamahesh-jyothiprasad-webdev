@@ -9,7 +9,6 @@
         .controller("ProfileController", ProfileController);
 
     function LoginController($location, UserService) {
-        UserService.logAllUsers(); //TO DO: remove this!!!
         var vm = this;
         vm.login = login;
 
@@ -48,13 +47,11 @@
     function ProfileController($routeParams, UserService) {
         var vm = this;
         vm.updateProfile = updateProfile;
-        vm.listWebsites = listWebsites;
 
         var user = UserService.findUserById(parseInt($routeParams.uid));
         if(user) {
             vm.user = user;
         }
-        console.log(vm.user); //TO DO: remove this!!!
 
         function updateProfile() {
             vm.success = null;

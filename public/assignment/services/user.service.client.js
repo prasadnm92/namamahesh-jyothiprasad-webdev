@@ -19,8 +19,7 @@
             findUserByUsername      : findUserByUsername,
             findUserByCredentials   : findUserByCredentials,
             updateUser              : updateUser,
-            deleteUser              : deleteUser,
-            logAllUsers             : function(){console.log(JSON.stringify(users));} //TO-DO: remove this!!!
+            deleteUser              : deleteUser
         };
         return api;
 
