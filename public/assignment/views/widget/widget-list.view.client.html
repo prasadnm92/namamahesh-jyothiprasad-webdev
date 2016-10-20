@@ -1,6 +1,6 @@
 <nav class="navbar navbar-header navbar-fixed-top widget-pages-theme">
     <div class="navbar-text pull-left stickyheader-align-left">
-        <a href="page-list.html" class="navbar-link">
+        <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link">
             <span class="glyphicon glyphicon-chevron-left widget-pages-theme"></span>
         </a>
     </div>
@@ -8,91 +8,50 @@
         Widgets
     </a>
     <div class="navbar-text pull-right stickyheader-align-right">
-        <a href="widget-chooser.html" class="navbar-link">
+        <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new" class="navbar-link">
             <span class="glyphicon glyphicon-plus widget-pages-theme"></span>
         </a>
     </div>
 </nav>
 
-<div class="container-fluid">
-    <div class="list-group">
-        <div class="object-underlay">
-            <div class="container-fluid"><!--style="padding-right: 0px"-->
-                <h1>GIZMODO</h1>
-            </div>
-            <div class="object-overlay">
-                <a href="widget-heading.html" class="icon-links"><span class="glyphicon glyphicon-cog"></span></a>
-                <span class="glyphicon glyphicon-menu-hamburger"></span>
-            </div>
+<div class="container-fluid list-group">
+    <div ng-repeat="widget in model.widgets"
+         ng-switch="widget.widgetType" class="object-underlay list-group-item zero-border">
+
+        <div ng-switch-when="HEADER"
+             ng-switch="widget.size" class="container-fluid">
+            <h1 ng-switch-when="1">{{widget.text}}</h1>
+            <h2 ng-switch-when="2">{{widget.text}}</h2>
+            <h3 ng-switch-when="3">{{widget.text}}</h3>
+            <h4 ng-switch-when="4">{{widget.text}}</h4>
+            <h5 ng-switch-when="5">{{widget.text}}</h5>
+            <h6 ng-switch-when="6">{{widget.text}}</h6>
         </div>
-        <div class="object-underlay">
-            <div class="container-fluid">
-                <h3>US Senate Reaches Compromise on Emergency Zika Funding</h3>
-            </div>
-            <div class="object-overlay">
-                <a href="widget-heading.html" class="icon-links"><span class="glyphicon glyphicon-cog"></span></a>
-                <span class="glyphicon glyphicon-menu-hamburger"></span>
-            </div>
+
+        <div ng-switch-when="YOUTUBE" class="container-fluid">
+            <iframe class="video-responsive" width="{{widget.width}}" ng-src="{{model.safeCheckYoutubeURL(widget.url)}}" frameborder="0" allowfullscreen></iframe>
         </div>
-        <div class="object-underlay">
-            <div class="container-fluid">
-                <img class="img-responsive" src="http://sharedmedia.grahamdigital.com/photo/2016/01/28/Mosquito-Zika-virus-jpg_1955778_ver1.0_1280_720.jpg" alt="Zika Virus"/>
-            </div>
-            <div class="object-overlay">
-                <a href="widget-image.html" class="icon-links"><span class="glyphicon glyphicon-cog"></span></a>
-                <span class="glyphicon glyphicon-menu-hamburger"></span>
-            </div>
+
+        <div ng-switch-when="IMAGE" class="container-fluid">
+            <img class="img-responsive" width="{{widget.width}}" ng-src="{{model.safeCheckImageURL(widget.url)}}" />
         </div>
-        <div class="object-underlay">
-            <div class="container-fluid">
-                <p>
-                    In February, the <span style="color:lightblue">White House formally asked Congress for $1.8 billion dollars</span>
-                    to help combat the Zika virus this summer.
-                    Now, the Senate has worked out a bipartisan deal will allocate $1.1 billion in emergency funding
-                </p>
-            </div>
-            <div class="object-overlay">
+
+        <div ng-switch-when="HTML"
+             ng-bind-html="model.safeCheckHTML(widget.text);" class="container-fluid">
+        </div>
+
+        <div class="object-overlay">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}" class="icon-links">
                 <span class="glyphicon glyphicon-cog"></span>
-                <span class="glyphicon glyphicon-menu-hamburger"></span>
-            </div>
-        </div>
-        <div class="object-underlay">
-            <div class="container-fluid">
-                <h3>Harlem Shake - Restromm Edition, Bangalore Institute of Technology</h3>
-            </div>
-            <div class="object-overlay">
-                <a href="widget-heading.html" class="icon-links"><span class="glyphicon glyphicon-cog"></span></a>
-                <span class="glyphicon glyphicon-menu-hamburger"></span>
-            </div>
-        </div>
-        <div class="object-underlay">
-            <div class="container-fluid">
-                <iframe class="video-responsive" src="https://www.youtube.com/embed/_RJGEYrtduY" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="object-overlay">
-                <a href="widget-youtube.html" class="icon-links"><span class="glyphicon glyphicon-cog"></span></a>
-                <span class="glyphicon glyphicon-menu-hamburger"></span>
-            </div>
-        </div>
-        <div class="object-underlay">
-            <div class="container-fluid">
-                <p>
-                    The viral Harlem Shake dance is back again with the extrodinary performance of the students from Bangalore Institute of Technology.
-                    With their performance, they brought more awaremess to this craze and more people began contributing to this viral video series.
-                    Watch and enjoy.
-                </p>
-            </div>
-            <div class="object-overlay">
-                <span class="glyphicon glyphicon-cog"></span>
-                <span class="glyphicon glyphicon-menu-hamburger"></span>
-            </div>
+            </a>
+            <span class="glyphicon glyphicon-menu-hamburger"></span>
         </div>
     </div>
 </div>
 
 <nav class="navbar navbar-fixed-bottom widget-pages-theme">
     <div class="navbar-text pull-right stickyheader-align-right">
-        <a href="profile.html" class="navbar-link">
+        <a href="#/user/{{model.userId}}" class="navbar-link">
             <span class="glyphicon glyphicon-user widget-pages-theme"></span>
         </a>
     </div>

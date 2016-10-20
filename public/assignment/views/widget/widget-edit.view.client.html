@@ -1,0 +1,30 @@
+<nav class="navbar navbar-header navbar-fixed-top widget-pages-theme">
+    <div class="navbar-text pull-left stickyheader-align-left">
+        <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="navbar-link">
+            <span class="glyphicon glyphicon-chevron-left widget-pages-theme"></span>
+        </a>
+    </div>
+    <a class="navbar-brand widget-pages-theme stickyheader-title" href="/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}">
+        Widget Edit
+    </a>
+    <div class="navbar-text pull-right stickyheader-align-right">
+        <a ng-click="model.updateWidget();" class="navbar-link">
+            <span class="glyphicon glyphicon-ok widget-pages-theme"></span>
+        </a>
+    </div>
+</nav>
+
+<div ng-show="model.error" class="alert alert-danger" role="alert">
+    {{model.error}}
+</div>
+
+<div ng-include="'views/widget/widget-'+model.widget.widgetType.toLowerCase()+'.editor.html'"></div>
+
+
+<nav class="navbar navbar-fixed-bottom widget-pages-theme">
+    <div class="navbar-text pull-right stickyheader-align-right">
+        <a href="#/user/{{model.userId}}" class="navbar-link">
+            <span class="glyphicon glyphicon-user widget-pages-theme"></span>
+        </a>
+    </div>
+</nav>

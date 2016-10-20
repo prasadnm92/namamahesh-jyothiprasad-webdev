@@ -73,6 +73,10 @@ body {
     background-color: white;
 }
 
+.zero-border {
+    border: 0px
+}
+
 .video-responsive {
     width: 100%;
     height: auto;
