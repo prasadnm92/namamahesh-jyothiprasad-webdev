@@ -57,6 +57,7 @@
             for(var w in websites) {
                 if(websites[w]._id===websiteId) {
                     website._id = websites[w]._id;
+                    website.developerId = websites[w].developerId;
                     websites[w] = website;
                     return true;
                 }

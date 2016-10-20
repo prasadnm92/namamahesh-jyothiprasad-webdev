@@ -22,9 +22,9 @@
 
         function createWebsite() {
             if(!WebsiteService.createWebsite(vm.userId, vm.website)) {
-                vm.error = "Website with this title already exists"
+                vm.error = "Website with this title already exists";
             }
-            if(!vm.error) $location.url("/user/"+vm.userId+"/website")
+            if(!vm.error) $location.url("/user/"+vm.userId+"/website");
         }
     }
 
