@@ -39,7 +39,7 @@
 
     function EditWebsiteController($location, $routeParams, WebsiteService) {
         var vm = this;
-        vm.createWebsite = updateWebsite;
+        vm.updateWebsite = updateWebsite;
         vm.deleteWebsite = deleteWebsite;
 
         function init() {
