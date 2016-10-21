@@ -10,15 +10,23 @@
 
     function WebsiteListController($routeParams, WebsiteService) {
         var vm = this;
-        vm.userId = parseInt($routeParams.uid);
-        vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
+
+        function init() {
+            vm.userId = parseInt($routeParams.uid);
+            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
+        }
+        init();
     }
 
     function NewWebsiteController($location, $routeParams, WebsiteService) {
         var vm = this;
-        vm.userId = parseInt($routeParams.uid);
-        vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
         vm.createWebsite = createWebsite;
+
+        function init() {
+            vm.userId = parseInt($routeParams.uid);
+            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
+        }
+        init();
 
         function createWebsite() {
             vm.error = null;
@@ -31,14 +39,19 @@
 
     function EditWebsiteController($location, $routeParams, WebsiteService) {
         var vm = this;
-        vm.userId = parseInt($routeParams.uid);
-        vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
-        vm.websiteId = parseInt($routeParams.wid);
-        vm.website = WebsiteService.findWebsiteById(vm.websiteId);
         vm.createWebsite = updateWebsite;
         vm.deleteWebsite = deleteWebsite;
 
+        function init() {
+            vm.userId = parseInt($routeParams.uid);
+            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
+            vm.websiteId = parseInt($routeParams.wid);
+            vm.website = WebsiteService.findWebsiteById(vm.websiteId);
+        }
+        init();
+
         function updateWebsite() {
+            vm.error = null;
             if(!WebsiteService.updateWebsite(vm.websiteId, vm.website)) {
                 vm.error = "Could not update website";
             }
@@ -46,6 +59,7 @@
         }
 
         function deleteWebsite() {
+            vm.error = null;
             if(!WebsiteService.deleteWebsite(vm.websiteId)) {
                 vm.error = "Could not delete website";
             }

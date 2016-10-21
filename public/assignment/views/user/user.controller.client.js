@@ -13,7 +13,6 @@
         vm.login = login;
 
         function login(username, password) {
-            console.log('in login');
             vm.error = null;
             if(!username || !password) vm.error="Enter username and password to login!";
             if(!vm.error) {
@@ -32,7 +31,6 @@
 
         function register(user) {
             vm.error = null;
-            console.log('in register');
             if(!user || !user.username) vm.error = "Enter a valid username";
             else if(!user || !user.password) vm.error = "Enter a password";
             else if(!user || (user.password !== user.confirmPassword)) vm.error = "Passwords don't match!";
@@ -48,10 +46,13 @@
         var vm = this;
         vm.updateProfile = updateProfile;
 
-        var user = UserService.findUserById(parseInt($routeParams.uid));
-        if(user) {
-            vm.user = user;
+        function init() {
+            var user = UserService.findUserById(parseInt($routeParams.uid));
+            if(user) {
+                vm.user = user;
+            }
         }
+        init();
 
         function updateProfile() {
             vm.success = null;

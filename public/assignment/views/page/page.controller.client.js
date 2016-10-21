@@ -17,10 +17,14 @@
 
     function NewPageController($location, $routeParams, PageService) {
         var vm = this;
-        vm.userId = parseInt($routeParams.uid);
-        vm.websiteId = parseInt($routeParams.wid);
-        vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
         vm.createPage = createPage;
+
+        function init() {
+            vm.userId = parseInt($routeParams.uid);
+            vm.websiteId = parseInt($routeParams.wid);
+            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+        }
+        init();
 
         function createPage() {
             vm.error = null;
@@ -33,15 +37,20 @@
 
     function EditPageController($location, $routeParams, PageService) {
         var vm = this;
-        vm.userId = parseInt($routeParams.uid);
-        vm.websiteId = parseInt($routeParams.wid);
-        vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
-        vm.pageId = parseInt($routeParams.pid);
-        vm.page = PageService.findPageById(vm.pageId);
         vm.updatePage = updatePage;
         vm.deletePage = deletePage;
 
+        function init() {
+            vm.userId = parseInt($routeParams.uid);
+            vm.websiteId = parseInt($routeParams.wid);
+            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+            vm.pageId = parseInt($routeParams.pid);
+            vm.page = PageService.findPageById(vm.pageId);
+        }
+        init();
+
         function updatePage() {
+            vm.error = null;
             if(!PageService.updatePage(vm.pageId, vm.page)) {
                 vm.error = "Could not update page";
             }
@@ -49,6 +58,7 @@
         }
 
         function deletePage() {
+            vm.error = null;
             if(!PageService.deletePage(vm.pageId)) {
                 vm.error = "Could not delete page";
             }

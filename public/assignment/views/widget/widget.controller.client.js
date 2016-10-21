@@ -10,19 +10,24 @@
 
     function WidgetListController($routeParams, $sce, WidgetService) {
         var vm = this;
-        vm.userId = parseInt($routeParams.uid);
-        vm.websiteId = parseInt($routeParams.wid);
-        vm.pageId = parseInt($routeParams.pid);
-        vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
         vm.safeCheckHTML = safeCheckHTML;
         vm.safeCheckYoutubeURL = safeCheckYoutubeURL;
         vm.safeCheckImageURL = safeCheckImageURL;
+
+        function init() {
+            vm.userId = parseInt($routeParams.uid);
+            vm.websiteId = parseInt($routeParams.wid);
+            vm.pageId = parseInt($routeParams.pid);
+            vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
+        }
+        init();
 
         function safeCheckHTML(html) {
             return $sce.trustAsHtml(html);
         }
 
         function safeCheckYoutubeURL(url) {
+            //change a full URL to youtube's embed URL format to use in iFrame
             var parts = url.split('/');
             var id = parts[parts.length-1];
             url = "https://www.youtube.com/embed/"+id;
@@ -36,10 +41,14 @@
 
     function NewWidgetController($routeParams, $location, WidgetService) {
         var vm = this;
-        vm.userId = parseInt($routeParams.uid);
-        vm.websiteId = parseInt($routeParams.wid);
-        vm.pageId = parseInt($routeParams.pid);
         vm.createWidget = createWidget;
+
+        function init() {
+            vm.userId = parseInt($routeParams.uid);
+            vm.websiteId = parseInt($routeParams.wid);
+            vm.pageId = parseInt($routeParams.pid);
+        }
+        init();
 
         function createWidget(type) {
             vm.error = null;
@@ -60,15 +69,20 @@
 
     function EditWidgetController($routeParams, $location, WidgetService) {
         var vm = this;
-        vm.userId = parseInt($routeParams.uid);
-        vm.websiteId = parseInt($routeParams.wid);
-        vm.pageId = parseInt($routeParams.pid);
-        vm.widgetId = parseInt($routeParams.wgid);
-        vm.widget = WidgetService.findWidgetById(vm.widgetId);
         vm.updateWidget = updateWidget;
         vm.deleteWidget = deleteWidget;
 
+        function init() {
+            vm.userId = parseInt($routeParams.uid);
+            vm.websiteId = parseInt($routeParams.wid);
+            vm.pageId = parseInt($routeParams.pid);
+            vm.widgetId = parseInt($routeParams.wgid);
+            vm.widget = WidgetService.findWidgetById(vm.widgetId);
+        }
+        init();
+
         function updateWidget() {
+            vm.error = null;
             if(!WidgetService.updateWidget(vm.widgetId,vm.widget)) {
                 vm.error="Could not create new widget";
             }
@@ -76,6 +90,7 @@
         }
 
         function deleteWidget() {
+            vm.error = null;
             if(!WidgetService.deleteWidget(vm.widgetId)) {
                 vm.error="Could not delete this widget";
             }
