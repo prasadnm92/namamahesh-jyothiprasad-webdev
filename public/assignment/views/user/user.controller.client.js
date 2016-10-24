@@ -47,7 +47,7 @@
         vm.updateProfile = updateProfile;
 
         function init() {
-            var user = UserService.findUserById(parseInt($routeParams.uid));
+            var user = UserService.findUserById($routeParams.uid);
             if(user) {
                 vm.user = user;
             }
@@ -57,7 +57,7 @@
         function updateProfile() {
             vm.success = null;
             vm.error = null;
-            if(UserService.updateUser(parseInt($routeParams.uid), vm.user)) {
+            if(UserService.updateUser($routeParams.uid, vm.user)) {
                 vm.success = "Successfully Updated";
             }
             else vm.error = "Could not update";

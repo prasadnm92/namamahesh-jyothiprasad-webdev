@@ -30,7 +30,7 @@
                     return false;
                 }
             }
-            user._id = new Date().getTime();
+            user._id = new Date().getTime().toString();
             users.push(user);
             return true;
         }

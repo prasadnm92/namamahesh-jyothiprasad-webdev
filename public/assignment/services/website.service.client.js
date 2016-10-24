@@ -30,7 +30,7 @@
                     return false;
                 }
             }
-            website._id = parseInt(new Date().getTime());
+            website._id = new Date().getTime().toString();
             website.developerId = userId;
             websites.push(website);
             return true;

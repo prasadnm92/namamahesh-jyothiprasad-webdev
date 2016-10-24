@@ -25,7 +25,7 @@
             for(var p in pages) {
                 if(pages[p].websiteId===websiteId && pages[p].name===page.name) return false;
             }
-            page._id = parseInt(new Date().getTime());
+            page._id = new Date().getTime().toString();
             page.websiteId = websiteId;
             pages.push(page);
             return true;

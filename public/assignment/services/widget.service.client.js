@@ -31,7 +31,7 @@
             for(var w in widgets) {
                 if(widgets[w].pageId === pageId) {
                     widget.pageId = pageId;
-                    widget._id = parseInt(new Date().getTime());
+                    widget._id = new Date().getTime().toString();
                     widgets.push(widget);
                     return widget._id;
                 }

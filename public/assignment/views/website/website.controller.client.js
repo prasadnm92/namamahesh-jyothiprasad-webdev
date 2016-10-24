@@ -12,7 +12,7 @@
         var vm = this;
 
         function init() {
-            vm.userId = parseInt($routeParams.uid);
+            vm.userId = $routeParams.uid;
             vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
         }
         init();
@@ -23,7 +23,7 @@
         vm.createWebsite = createWebsite;
 
         function init() {
-            vm.userId = parseInt($routeParams.uid);
+            vm.userId = $routeParams.uid;
             vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
         }
         init();
@@ -43,9 +43,9 @@
         vm.deleteWebsite = deleteWebsite;
 
         function init() {
-            vm.userId = parseInt($routeParams.uid);
+            vm.userId = $routeParams.uid;
             vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
-            vm.websiteId = parseInt($routeParams.wid);
+            vm.websiteId = $routeParams.wid;
             vm.website = WebsiteService.findWebsiteById(vm.websiteId);
         }
         init();
