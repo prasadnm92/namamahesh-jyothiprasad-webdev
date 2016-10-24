@@ -42,12 +42,14 @@
         }
     }
 
-    function ProfileController($routeParams, UserService) {
+    function ProfileController($routeParams, $location, UserService) {
         var vm = this;
         vm.updateProfile = updateProfile;
+        vm.deleteUser = deleteUser;
 
         function init() {
-            var user = UserService.findUserById($routeParams.uid);
+            vm.userId = $routeParams.uid;
+            var user = UserService.findUserById(vm.userId);
             if(user) {
                 vm.user = user;
             }
@@ -57,10 +59,18 @@
         function updateProfile() {
             vm.success = null;
             vm.error = null;
-            if(UserService.updateUser($routeParams.uid, vm.user)) {
+            if(UserService.updateUser(vm.userId, vm.user)) {
                 vm.success = "Successfully Updated";
             }
             else vm.error = "Could not update";
+        }
+
+        function deleteUser() {
+            vm.error = null;
+            if(!UserService.deleteUser(vm.userId)) {
+                vm.error = "Could not delete";
+            }
+            else $location.url("/login");
         }
     }
 })();
