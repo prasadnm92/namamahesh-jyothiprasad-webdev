@@ -21,12 +21,12 @@ module.exports = function(app) {
         for(var u in users) {
             if(user.username === users[u].username) {
                 res.send(null);
+                return;
             }
         }
         user._id = new Date().getTime().toString();
         users.push(user);
         res.send(user);
-
     }
 
     function findUser(req, res) {
@@ -39,7 +39,10 @@ module.exports = function(app) {
     function findUserByUsername(req, res) {
         var username = req.query.username;
         for(var u in users) {
-            if(users[u].username === username) res.send(users[u]);
+            if(users[u].username === username) {
+                res.send(users[u]);
+                return;
+            }
         }
         res.send(undefined);
     }
@@ -48,7 +51,10 @@ module.exports = function(app) {
         var username = req.query.username;
         var password = req.query.password;
         for(var u in users) {
-            if(users[u].username === username && users[u].password === password) res.send(users[u]);
+            if(users[u].username === username && users[u].password === password) {
+                res.send(users[u]);
+                return;
+            }
         }
         res.send(undefined);
     }
@@ -56,7 +62,10 @@ module.exports = function(app) {
     function findUserById(req, res) {
         var uid = req.params.uid;
         for(var u in users) {
-            if(users[u]._id === uid) res.send(users[u]);
+            if(users[u]._id === uid) {
+                res.send(users[u]);
+                return;
+            }
         }
         res.send(undefined);
     }
