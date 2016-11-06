@@ -4,17 +4,30 @@
 module.exports = function(app) {
     var multer = require('multer');
     var upload = multer({dest: __dirname+'/../../public/assignment/uploads'});
+    /* If the file needs to be save with its filetype extension
+    //$> npm install mime --save
+    var mime = require('mime');
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, __dirname+'/../../public/assignment/uploads')
+        },
+        filename: function (req, file, cb) {
+            cb(null, file.fieldname + '.' + mime.extension(file.mimetype));
+        }
+    });
+    var upload = multer({ storage: storage });
+    */
 
     var widgets = [
-        { "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "GIZMODO"},
-        { "_id": "234", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
+        { "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "GIZMODO", "order": 0},
+        { "_id": "234", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum", "order": 1},
         { "_id": "345", "widgetType": "IMAGE", "pageId": "321", "width": "100%",
-            "url": "http://lorempixel.com/400/200/"},
-        { "_id": "456", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"},
-        { "_id": "567", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
+            "url": "http://lorempixel.com/400/200/", "order": 2},
+        { "_id": "456", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>", "order": 3},
+        { "_id": "567", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum", "order": 4},
         { "_id": "678", "widgetType": "YOUTUBE", "pageId": "321", "width": "100%",
-            "url": "https://youtu.be/AM2Ivdi9c4E" },
-        { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
+            "url": "https://youtu.be/AM2Ivdi9c4E", "order": 5},
+        { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>", "order": 6}
     ];
 
     app.post("/api/page/:pid/widget", createWidget);
@@ -23,12 +36,14 @@ module.exports = function(app) {
     app.put("/api/widget/:wgid", updateWidget);
     app.delete("/api/widget/:wgid", deleteWidget);
     app.post ("/api/upload", upload.single('myFile'), uploadImage);
+    app.put("/page/:pid/widget", sortWidgets);
 
     function createWidget(req, res) {
         var pageId = req.params.pid;
         var widget = req.body;
         widget.pageId = pageId;
         widget._id = new Date().getTime().toString();
+        widget.order = getLastWidgetOrder(pageId)+1;    //add the new widget at the end
         widgets.push(widget);
         res.send(widget);
     }
@@ -39,6 +54,10 @@ module.exports = function(app) {
         for(var w in widgets) {
             if(widgets[w].pageId === pageId) pageWidgets.push(widgets[w]);
         }
+        //order widgets based on the order in which they are placed on the page
+        pageWidgets.sort(function(a, b) {
+            return a.order > b.order;
+        });
         res.send(pageWidgets);
     }
 
@@ -120,5 +139,46 @@ module.exports = function(app) {
             }
         }
         return null;
+    }
+
+    function sortWidgets(req, res) {
+        var pid = req.params.pid;
+        var initial = parseInt(req.query.initial);
+        var final   = parseInt(req.query.final);
+        if(initial===final) {
+            res.sendStatus(200);
+            return;
+        }
+        var movedWidget = null;
+
+        for(var w in widgets) {
+            if(widgets[w].pageId === pid) {
+                //if widget was moved down
+                if(initial < final) {
+                    if(widgets[w].order===initial) movedWidget = w;
+                    else if(widgets[w].order>initial && widgets[w].order<=final) widgets[w].order-=1;
+                }
+                //if widget was moved up
+                else {
+                    if(widgets[w].order===initial) movedWidget = w;
+                    else if(widgets[w].order<initial && widgets[w].order>=final) widgets[w].order+=1;
+                }
+            }
+        }
+        if(movedWidget) widgets[movedWidget].order = final;
+        res.sendStatus(200);
+    }
+
+    /*
+     * HELPER FUNCTIONS
+     ** getLastWidgetOrder : returns the order value of the last widget in the page
+     *                       (as displayed on the UI)
+     */
+    function getLastWidgetOrder(pageId) {
+        var lastOrder = -1;
+        for(var w in widgets) {
+            if(widgets[w].pageId===pageId && widgets[w].order>lastOrder) lastOrder = widgets[w].order;
+        }
+        return lastOrder;
     }
 };
