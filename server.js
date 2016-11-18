@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 
 /*run test app to test mongoDB connection*/
-require ("./test/app.js")(app);
+//require ("./test/app.js")(app);
 
 /*run the node app*/
 require("./assignment/app.js")(app);
