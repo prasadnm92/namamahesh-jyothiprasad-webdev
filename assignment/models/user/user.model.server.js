@@ -74,6 +74,6 @@ module.exports = function() {
                 }
                 userObj.websites = websites;
                 return userObj.save();
-            })
+            });
     }
 };

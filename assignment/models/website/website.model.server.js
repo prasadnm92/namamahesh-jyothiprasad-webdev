@@ -13,7 +13,8 @@ module.exports = function() {
         findAllWebsitesForUser  : findAllWebsitesForUser,
         findWebsiteById         : findWebsiteById,
         updateWebsite           : updateWebsite,
-        deleteWebsite           : deleteWebsite
+        deleteWebsite           : deleteWebsite,
+        removePageFromWebsite   : removePageFromWebsite
     };
     return api;
 
@@ -72,6 +73,19 @@ module.exports = function() {
                         return WebsiteModel
                             .remove({_id: websiteId});
                     });
+            });
+    }
+
+    function removePageFromWebsite(websiteId, pageId) {
+        return WebsiteModel
+            .findById(websiteId)
+            .then(function(websiteObj) {
+                var pages = websiteObj.pages;
+                for(var p in pages) {
+                    if(pages[p].toString()===pageId) pages.splice(p,1);
+                }
+                websiteObj.pages = pages;
+                return websiteObj.save();
             });
     }
 };
