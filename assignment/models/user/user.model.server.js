@@ -14,7 +14,8 @@ module.exports = function() {
         findUserByCredentials   : findUserByCredentials,
         findUserById            : findUserById,
         updateUser              : updateUser,
-        deleteUser              : deleteUser
+        deleteUser              : deleteUser,
+        removeWebsiteFromUser   : removeWebsiteFromUser
     };
     return api;
 
@@ -61,5 +62,18 @@ module.exports = function() {
     function deleteUser(userId) {
         return UserModel
             .remove({_id: userId});
+    }
+
+    function removeWebsiteFromUser(userId, websiteId) {
+        return UserModel
+            .findById(userId)
+            .then(function(userObj) {
+                var websites = userObj.websites;
+                for(var w in websites) {
+                    if(websites[w].toString()===websiteId) websites.splice(w,1);
+                }
+                userObj.websites = websites;
+                return userObj.save();
+            })
     }
 };
