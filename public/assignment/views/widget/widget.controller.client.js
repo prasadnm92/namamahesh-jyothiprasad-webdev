@@ -61,7 +61,7 @@
         function createWidget(type) {
             vm.error = null;
             //TODO: remove this check once all widget types are implemented
-            if(type!='HEADER' && type!='IMAGE' && type!='YOUTUBE' && type!='HTML') {
+            if(type!='HEADER' && type!='IMAGE' && type!='YOUTUBE' && type!='HTML' && type!='TEXT') {
                 vm.error = 'Functionality not available';
             }
             else {
