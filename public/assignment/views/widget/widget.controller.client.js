@@ -37,6 +37,7 @@
             //change a full URL to youtube's embed URL format to use in iFrame
             var parts = url.split('/');
             var id = parts[parts.length-1];
+            if(id.includes("watch")) id = id.split('=')[1];
             url = "https://www.youtube.com/embed/"+id;
             return $sce.trustAsResourceUrl(url);
         }
