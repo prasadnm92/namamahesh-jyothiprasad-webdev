@@ -3,6 +3,22 @@
  */
 module.exports = function(app, model) {
 
+    var passport = require('passport');
+    var LocalStrategy = require('passport-local').Strategy;
+    var cookieParser = require('cookie-parser');
+    var session = require('express-session');
+    app.use(session({
+        secret: 'this is a secret',
+        resave: true,
+        saveUninitialized: true
+    }));
+    app.use(cookieParser());
+    app.use(passport.initialize());
+    app.use(passport.session());
+    passport.use(new LocalStrategy(localStrategy));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
     var users = [
         {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
         {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
@@ -10,11 +26,61 @@ module.exports = function(app, model) {
         {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
     ];
 
+    app.post("/api/login", passport.authenticate('local'), login);
+    app.post("/api/checkLoggedIn", checkLoggedIn);
+    app.post("/api/logout", logout);
     app.post("/api/user", createUser);
     app.get("/api/user", findUser);
     app.get("/api/user/:uid", findUserById);
     app.put("/api/user/:uid", updateUser);
     app.delete("/api/user/:uid", deleteUser);
+
+    function logout(req, res) {
+        req.logout();
+        res.sendStatus(200);
+    }
+
+    function checkLoggedIn(req, res) {
+        res.send(req.isAuthenticated()? req.user: undefined);
+    }
+
+    function localStrategy(username, password, done) {
+        model
+            .userModel
+            .findUserByCredentials(username, password)
+            .then(
+                function(user) {
+                    if(!user) return done(null, false);
+                    return done(null, user);
+                },
+                function(error) {
+                    return done(error);
+                }
+            );
+    }
+
+    function login(req, res) {
+        res.send(req.user);
+    }
+
+    function serializeUser(user, done) {
+        //put it into the current session
+        done(null, user);
+    }
+
+    function deserializeUser(user, done) {
+        model
+            .userModel
+            .findUserById(user._id)
+            .then(
+                function(user) {
+                    done(null, user);
+                },
+                function(error) {
+                    done(error);
+                }
+            )
+    }
 
     function createUser(req, res) {
         var user = req.body;

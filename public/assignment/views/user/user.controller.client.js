@@ -17,7 +17,7 @@
             if(!username || !password) vm.error="Enter username and password to login!";
             if(!vm.error) {
                 UserService
-                    .findUserByCredentials(username, password)
+                    .login(username, password)
                     .success(function(user) {
                         if(user) $location.url("/user/" + user._id);
                         else vm.error = "Username or Password does not match";
@@ -58,6 +58,7 @@
         var vm = this;
         vm.updateProfile = updateProfile;
         vm.deleteUser = deleteUser;
+        vm.logout = logout;
 
         function init() {
             vm.userId = $routeParams.uid;
@@ -93,6 +94,17 @@
                 .success(function(status) {
                     if(status) $location.url("/login");
                     else vm.error = "Could not delete";
+                })
+                .error(function(err) {
+
+                });
+        }
+
+        function logout() {
+            UserService
+                .logout()
+                .success(function(status) {
+                    if(status) $location.url("/login");
                 })
                 .error(function(err) {
 
