@@ -14,7 +14,9 @@ module.exports = function() {
         findPageById            : findPageById,
         updatePage              : updatePage,
         deletePage              : deletePage,
-        removeWidgetFromPage    : removeWidgetFromPage
+        removeWidgetFromPage    : removeWidgetFromPage,
+        findWidgetsForPage      : findWidgetsForPage,
+        reorderWidgetsForPage   : reorderWidgetsForPage
     };
     return api;
 
@@ -87,6 +89,25 @@ module.exports = function() {
                 }
                 pageObj.widgets = widgets;
                 return pageObj.save();
+            });
+    }
+
+    function findWidgetsForPage(pageId) {
+        return PageModel
+            .findById(pageId)
+            .populate('widgets')
+            .select({'widgets':1, '_id':0});
+    }
+
+    function reorderWidgetsForPage(pageId, initial, final) {
+        return findPageById(pageId)
+            .then(function(page) {
+                var widgets = page.widgets;
+                //remove from initial and put it at final
+                var movedWidget = widgets.splice(initial,1)[0];
+                widgets.splice(final,0,movedWidget);
+                page.widgets=widgets;
+                return page.save();
             });
     }
 };

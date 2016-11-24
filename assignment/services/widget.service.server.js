@@ -57,15 +57,15 @@ module.exports = function(app, model) {
     function findAllWidgetsForPage(req, res) {
         var pageId = req.params.pid;
         model
-            .widgetModel
-            .findAllWidgetsForPage(pageId)
+            .pageModel
+            .findWidgetsForPage(pageId)
             .then(
                 function(pageWidgets) {
                     //order widgets based on the order in which they are placed on the page
-                    pageWidgets.sort(function(a, b) {
+                    /*pageWidgets.sort(function(a, b) {
                         return a.order > b.order;
-                    });
-                    res.send(pageWidgets);
+                    });*/
+                    res.send(pageWidgets.widgets);
                 },
                 function(error) {
                     res.sendStatus(400).send(error);
@@ -167,24 +167,22 @@ module.exports = function(app, model) {
         var pid = req.params.pid;
         var initial = parseInt(req.query.initial);
         var final   = parseInt(req.query.final);
-        res.sendStatus(200);
-        /*if(initial===final) {
+
+        if(initial===final) {
             res.sendStatus(200);
         }
         else {
             model
-                .widgetModel
-                .reorderWidget(pid, initial, final)
+                .pageModel
+                .reorderWidgetsForPage(pid, initial, final)
                 .then(
-                    function(something) {
-                        console.log("something: "+something.toString());
-                        res.sendStatus(200);
+                    function(page) {
+                        res.sendStatus(200).redirect('back');
                     },
                     function(error) {
-                        console.log("183.error: "+error.toString());
                         res.sendStatus(400).send(error);
                     }
                 );
-        }*/
+        }
     }
 };
