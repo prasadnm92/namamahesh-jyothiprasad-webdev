@@ -18,7 +18,14 @@
             vm.userId = $routeParams.uid;
             vm.websiteId = $routeParams.wid;
             vm.pageId = $routeParams.pid;
-            vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
+            WidgetService
+                .findWidgetsByPageId(vm.pageId)
+                .success(function(widgets) {
+                    vm.widgets = widgets;
+                })
+                .error(function(err) {
+
+                });
         }
         init();
 
@@ -30,6 +37,7 @@
             //change a full URL to youtube's embed URL format to use in iFrame
             var parts = url.split('/');
             var id = parts[parts.length-1];
+            if(id.includes("watch")) id = id.split('=')[1];
             url = "https://www.youtube.com/embed/"+id;
             return $sce.trustAsResourceUrl(url);
         }
@@ -52,18 +60,26 @@
 
         function createWidget(type) {
             vm.error = null;
-            var newWgid;
             //TODO: remove this check once all widget types are implemented
-            if(type!='HEADER' && type!='IMAGE' && type!='YOUTUBE' && type!='HTML') {
+            if(type!='HEADER' && type!='IMAGE' && type!='YOUTUBE' && type!='HTML' && type!='TEXT') {
                 vm.error = 'Functionality not available';
             }
             else {
-                var widget = {};
-                widget.widgetType = type;
-                newWgid = WidgetService.createWidget(vm.pageId, widget);
-                if(!newWgid) vm.error="Could not create widget";
+                var widget = {
+                    widgetType : type
+                };
+                WidgetService
+                    .createWidget(vm.pageId, widget)
+                    .success(function(widget) {
+                        if(widget) {
+                            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+widget._id);
+                        }
+                        else vm.error="Could not create widget";
+                    })
+                    .error(function(err) {
+
+                    });
             }
-            if(!vm.error) $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+newWgid);
         }
     }
 
@@ -77,24 +93,43 @@
             vm.websiteId = $routeParams.wid;
             vm.pageId = $routeParams.pid;
             vm.widgetId = $routeParams.wgid;
-            vm.widget = WidgetService.findWidgetById(vm.widgetId);
+            WidgetService
+                .findWidgetById(vm.widgetId)
+                .success(function(widget) {
+                    vm.widget = widget;
+                })
+                .error(function(err) {
+
+                });
         }
         init();
 
         function updateWidget() {
             vm.error = null;
-            if(!WidgetService.updateWidget(vm.widgetId,vm.widget)) {
-                vm.error="Could not create new widget";
-            }
-            if(!vm.error) $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+            WidgetService
+                .updateWidget(vm.widgetId,vm.widget)
+                .success(function(widget) {
+                    if(widget)
+                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+                    else vm.error="Could not create new widget";
+                })
+                .error(function(err) {
+
+                });
         }
 
         function deleteWidget() {
             vm.error = null;
-            if(!WidgetService.deleteWidget(vm.widgetId)) {
-                vm.error="Could not delete this widget";
-            }
-            if(!vm.error) $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+            WidgetService
+                .deleteWidget(vm.widgetId)
+                .success(function(status) {
+                    if(status)
+                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+                    else vm.error="Could not delete this widget";
+                })
+                .error(function(err) {
+
+                });
         }
     }
 })();

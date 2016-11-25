@@ -1,0 +1,40 @@
+<nav class="navbar navbar-header navbar-fixed-top widget-pages-theme">
+    <div class="navbar-text pull-left stickyheader-align-left">
+        <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}" class="navbar-link">
+            <span class="glyphicon glyphicon-chevron-left widget-pages-theme"></span>
+        </a>
+    </div>
+    <div class="navbar-brand widget-pages-theme stickyheader-title">
+        Search Flickr
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div ng-show="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
+    <div class="input-group">
+        <input ng-model="searchText" type="text" class="form-control" placeholder="Enter your search text here">
+        <span class="input-group-btn">
+            <a ng-click="model.searchPhotos(searchText);" class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-search"></span>
+            </a>
+        </span>
+    </div>
+
+    <div class="row" ng-repeat="photoRow in model.photos">
+        <div class="col-xs-4 flickr-image" ng-repeat="photo in photoRow">
+            <img ng-click="model.selectPhoto(photo)"
+                 ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_m.jpg"/>
+        </div>
+    </div>
+</div>
+
+
+<nav class="navbar navbar-fixed-bottom widget-pages-theme">
+    <div class="navbar-text pull-right stickyheader-align-right">
+        <a href="#/user/{{model.userId}}" class="navbar-link">
+            <span class="glyphicon glyphicon-user widget-pages-theme"></span>
+        </a>
+    </div>
+</nav>

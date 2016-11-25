@@ -2,7 +2,11 @@
     <form>
         <div class="form-group">
             <label for="text">Text</label>
-            <textarea class="form-control" ng-model="model.widget.text" id="text" placeholder="Enter text"></textarea>
+            <div ng-model="model.widget.text" text-angular
+                 ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+                 ['indent','outdent'],['html']]">
+                <textarea class="form-control" id="text" placeholder="Enter text"></textarea>
+            </div>
         </div>
     </form>
 
