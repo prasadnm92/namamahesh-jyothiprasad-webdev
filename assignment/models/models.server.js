@@ -29,6 +29,7 @@ module.exports = function() {
     websiteModel.setModel(model);
     pageModel.setModel(model);
     widgetModel.setModel(model);
+    //TODO: cascade deletion of a parent object to objects it holds (user -> websites, so on)
 
     return model;
 };
