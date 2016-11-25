@@ -6,8 +6,8 @@
     <input ng-model="model.user.username" type="text" class="form-control" placeholder="Username"/>
     <input ng-model="model.user.password" type="password" class="form-control" placeholder="Password"/>
     <input ng-model="model.user.confirmPassword" type="password" class="form-control" placeholder="Confirm Password"/>
-    <a class="btn user-pages-theme btn-block"
-       ng-click="model.register(model.user);">Register</a>
-    <a class="btn btn-danger  btn-block"
-       href="#/login">Cancel</a>
+    <input type="button" class="btn user-pages-theme btn-block"
+       ng-click="model.register(model.user);" value="Register"/>
+    <input type="button" class="btn btn-danger  btn-block"
+       onclick="location.href='#/login';" value="Cancel"/>
 </div>
