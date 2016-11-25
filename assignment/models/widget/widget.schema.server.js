@@ -29,7 +29,6 @@ module.exports = function() {
         icon: String,
         deletable: Boolean,
         formatted: Boolean,
-        order: Number,
         metadata : ImageMetadataSchema,
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "widget"});
