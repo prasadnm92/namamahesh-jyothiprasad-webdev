@@ -1,0 +1,28 @@
+<md-card md-theme="default" flex>
+    <md-card-header class="card-header-compact-padding">
+        <md-card-avatar>
+            <img ng-src="../logos/{{project.tech_logo}}"/>
+        </md-card-avatar>
+        <md-card-header-text>
+            <span class="md-title">{{project.technology}}</span>
+            <span class="md-subhead">{{project.tech_subtitle}}</span>
+        </md-card-header-text>
+    </md-card-header>
+    <md-card-title class="card-title-compact-padding">
+        <md-card-title-text>
+            <a ng-href="{{project.link}}" class="md-headline project-title">{{project.name}}</a>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-title class="card-title-media-compact-padding">
+        <md-card-title-media>
+            <md-media-md>
+                <div ng-if="project.project_logo">
+                    <img ng-src="../logos/{{project.project_logo}}" alt="{{project.name}}">
+                </div>
+                <div ng-if="!project.project_logo">
+                    <img src="../logos/blank_project_logo.jpg" alt="{{project.name}}">
+                </div>
+            </md-media-md>
+        </md-card-title-media>
+    </md-card-title>
+</md-card>
