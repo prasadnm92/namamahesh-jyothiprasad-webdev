@@ -4,6 +4,7 @@
 module.exports = function() {
     var model = {};
     var mongoose = require("mongoose");
+    var Q = require("q");
     var UserSchema = require("./user.schema.server.js")();
     var UserModel = mongoose.model("UserModel", UserSchema);
 
@@ -60,8 +61,23 @@ module.exports = function() {
     }
 
     function deleteUser(userId) {
+        return removeUser(userId);
+    }
+
+    function removeUser(userId) {
         return UserModel
-            .remove({_id: userId});
+         .findById(userId)
+         .select({"_id":0, "websites":1})
+         .then(function(userWebsites) {
+             var promises = userWebsites.websites.map(function(website) {
+                 return model.websiteModel.removeWebsite(website);
+             });
+             return Q
+                 .all(promises)
+                 .then(function() {
+                     return UserModel.remove({_id:userId});
+                 });
+         });
     }
 
     function removeWebsiteFromUser(userId, websiteId) {

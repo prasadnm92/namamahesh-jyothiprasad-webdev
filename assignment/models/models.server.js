@@ -7,11 +7,13 @@ module.exports = function() {
     var connectionString = 'mongodb://127.0.0.1:27017/wam-fall-2016';
     //for production: mongodb://<dbuser>:<dbpassword>@ds035796.mlab.com:35796/web-dev
     if(process.env.MLAB_PASSWORD) {
+        console.log("Connecting to production mongo...");
         connectionString = 'mongodb://' +
             process.env.MLAB_USERNAME + ':' +
             process.env.MLAB_PASSWORD +
             '@ds035796.mlab.com:35796/web-dev';
     }
+    else console.log("Connecting to local mongo...");
     mongoose.connect(connectionString);
 
     var userModel = require("./user/user.model.server")();

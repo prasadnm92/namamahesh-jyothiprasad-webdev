@@ -4,6 +4,7 @@
 module.exports = function() {
     var model = {};
     var mongoose = require("mongoose");
+    var Q = require("q");
     var WebsiteSchema = require("./website.schema.server.js")();
     var WebsiteModel = mongoose.model("WebsiteModel", WebsiteSchema);
 
@@ -14,7 +15,8 @@ module.exports = function() {
         findWebsiteById         : findWebsiteById,
         updateWebsite           : updateWebsite,
         deleteWebsite           : deleteWebsite,
-        removePageFromWebsite   : removePageFromWebsite
+        removePageFromWebsite   : removePageFromWebsite,
+        removeWebsite           : removeWebsite
     };
     return api;
 
@@ -70,8 +72,23 @@ module.exports = function() {
                     .userModel
                     .removeWebsiteFromUser(userId, websiteId)
                     .then(function(user) {
-                        return WebsiteModel
-                            .remove({_id: websiteId});
+                        return removeWebsite(websiteId);
+                    });
+            });
+    }
+
+    function removeWebsite(websiteId) {
+        return WebsiteModel
+            .findById(websiteId)
+            .select({"_id":0, "pages":1})
+            .then(function(websitePages) {
+                var promises = websitePages.pages.map(function(page) {
+                    return model.pageModel.removePage(page);
+                });
+                return Q
+                    .all(promises)
+                    .then(function() {
+                        return WebsiteModel.remove({_id:websiteId});
                     });
             });
     }

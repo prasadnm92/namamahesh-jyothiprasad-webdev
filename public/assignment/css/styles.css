@@ -96,6 +96,12 @@ body {
     height: 100%;
 }
 
+.flickr-image {
+    display:table-cell;
+    vertical-align:middle;
+    text-align:center;
+}
+
 .v-divider{
     margin-left:5px;
     margin-right:5px;
