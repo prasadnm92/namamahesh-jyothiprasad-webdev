@@ -13,7 +13,8 @@ module.exports = function() {
         findAllWidgetsForPage   : findAllWidgetsForPage,
         findWidgetById          : findWidgetById,
         updateWidget            : updateWidget,
-        deleteWidget            : deleteWidget
+        deleteWidget            : deleteWidget,
+        removeWidget            : removeWidget
     };
     return api;
 
@@ -85,9 +86,13 @@ module.exports = function() {
                     .pageModel
                     .removeWidgetFromPage(pageId, widgetId)
                     .then(function(page) {
-                        return WidgetModel
-                            .remove({_id: widgetId});
+                        return removeWidget(widgetId);
                     });
             });
+    }
+
+    function removeWidget(widgetId) {
+        return WidgetModel
+            .remove({_id: widgetId});
     }
 };
