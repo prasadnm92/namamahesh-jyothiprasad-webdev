@@ -7,8 +7,7 @@
         var vm=this;
 
         function init(){
-            vm.welcome = "Hello World!";
-            console.log("controller hello");
+            vm.currentYear = (new Date()).getFullYear();
             vm.work_experience = [
                 {
                     company: "TetraScience",
