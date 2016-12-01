@@ -29,7 +29,7 @@
         }
     }
 
-    function RegisterController($location, UserService) {
+    function RegisterController($location, $rootScope, UserService) {
         var vm = this;
         vm.register = register;
 
@@ -40,9 +40,10 @@
             else if(!user || (user.password !== user.confirmPassword)) vm.error = "Passwords don't match!";
             else {
                 UserService
-                    .createUser(user)
+                    .register(user)
                     .success(function(user) {
                         if(user) {
+                            $rootScope.currentUser = user;
                             $location.url("/user/"+user._id);
                         }
                         else vm.error = "Username already exists";

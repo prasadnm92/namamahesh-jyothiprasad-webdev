@@ -22,19 +22,14 @@ module.exports = function(app, model) {
     app.post("/api/login", passport.authenticate('local'), login);
     app.post("/api/checkLoggedIn", checkLoggedIn);
     app.post("/api/logout", logout);
-    app.post("/api/user", createUser);
+    app.post("/api/register", register);
     app.get("/api/user", findUser);
     app.get("/api/user/:uid", findUserById);
     app.put("/api/user/:uid", updateUser);
     app.delete("/api/user/:uid", deleteUser);
 
-    function logout(req, res) {
-        req.logout();
-        res.sendStatus(200);
-    }
-
-    function checkLoggedIn(req, res) {
-        res.send(req.isAuthenticated()? req.user: undefined);
+    function login(req, res) {
+        res.send(req.user);
     }
 
     function localStrategy(username, password, done) {
@@ -52,12 +47,8 @@ module.exports = function(app, model) {
             );
     }
 
-    function login(req, res) {
-        res.send(req.user);
-    }
-
     function serializeUser(user, done) {
-        //put it into the current session
+        //put user into the current session
         done(null, user);
     }
 
@@ -75,14 +66,29 @@ module.exports = function(app, model) {
             )
     }
 
-    function createUser(req, res) {
+    function checkLoggedIn(req, res) {
+        res.send(req.isAuthenticated()? req.user: undefined);
+    }
+
+    function logout(req, res) {
+        req.logout();
+        res.sendStatus(200);
+    }
+
+    function register(req, res) {
         var user = req.body;
         model
             .userModel
             .createUser(user)
             .then(
                 function(user) {
-                    res.send(user);
+                    req.login(user, function(err) {
+                        if(err) {
+                            res.sendStatus(400).send(err);
+                        } else {
+                            res.send(user);
+                        }
+                    });
                 },
                 function(error) {
                     res.sendStatus(400).send(error);
