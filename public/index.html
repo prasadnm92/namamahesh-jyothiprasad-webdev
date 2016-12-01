@@ -1,30 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Web Dev Course Home Page</title>
-</head>
-<body>
-    <h1>Web Dev Course Home Page</h1>
+<html lang="en" ng-app="MyProfile">
+    <head>
+        <!--Mobile compatibility-->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-    <p>
-        Customize this home page to your linking.
-    </p>
+        <title>Jyothi Prasad</title>
 
-    <h2>Required links</h2>
-    <ul>
-        <li>
-            <a href="project/index.html">Project</a>
-        </li>
-        <li>
-            <a href="assignment/">Assignment</a>
-        </li>
-        <li>
-            <a href="test/index.html">Test MongoDB</a>
-        </li>
-        <li>
-            <a href="https://github.com/prasadnm92/namamahesh-jyothiprasad-webdev" target="_blank">Your public repository at GitHub.com</a>
-        </li>
-    </ul>
-</body>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.1/angular-material.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+        <link href="css/styles.css" rel="stylesheet">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-aria.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <script src="profileApp.js"></script>
+        <script src="profileConfig.js"></script>
+        <script src="views/profile.view.controller.js"></script>
+
+        <!--Directives-->
+        <script src="directives/profileContent.js"></script>
+        <script src="directives/educationCard.js"></script>
+        <script src="directives/workExSection.js"></script>
+        <script src="directives/projectCard.js"></script>
+        <script src="directives/technicalSkills.js"></script>
+    </head>
+    <body>
+        <div ng-view></div>
+    </body>
 </html>

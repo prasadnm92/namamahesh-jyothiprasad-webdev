@@ -1,0 +1,16 @@
+<section>
+    <div class="md-subhead">
+        {{skill.category}}
+    </div>
+
+    <div layout="row" layout-align="start center" layout-wrap>
+        <div ng-repeat="item in skill.items" class="padding-r20">
+            <div class="round" id="hover-img">
+                <img src="../logos/{{item.logo}}" alt="{{item.alt}}">
+            </div>
+            <div class="skill-title md-caption" flex>{{item.alt}}</div>
+        </div>
+    </div>
+    <br>
+    <md-divider></md-divider>
+</section>

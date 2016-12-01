@@ -1,0 +1,15 @@
+<section layout-margin class="md-whiteframe-z1 panel-widget all-rounded-corners">
+    <div>
+        <span class="md-title">{{work.company}}</span>
+        <div layout="row">
+            <span class="md-subhead">{{work.position}}</span>
+            <span flex></span>
+            <span class="md-subhead">{{work.duration}}</span>
+        </div>
+    </div>
+    <ul>
+        <li ng-repeat="task in work.tasks">
+            {{task}}
+        </li>
+    </ul>
+</section>

@@ -1,0 +1,20 @@
+<md-card md-theme="default" class="all-rounded-corners" flex>
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-title">{{education.university}}</span>
+            <span class="md-subhead">{{education.degree}}</span>
+        </md-card-title-text>
+        <md-card-title-media class="md-media-sm md-card-image">
+            <div ng-if="education.logo">
+                <img ng-src="../logos/{{education.logo}}" class="md-media-sm">
+            </div>
+            <div ng-if="!education.logo" class="card-media">
+                <div class="md-media-sm card-media"></div>
+            </div>
+        </md-card-title-media>
+    </md-card-title>
+    <md-card-actions layout="row" layout-align="end center">
+        <md-button>Relevant Courses</md-button>
+        <md-button>Awards</md-button>
+    </md-card-actions>
+</md-card>
