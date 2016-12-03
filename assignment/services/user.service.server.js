@@ -3,6 +3,7 @@
  */
 module.exports = function(app, model) {
 
+    var bcrypt = require("bcrypt-nodejs");
     var passport = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
     var cookieParser = require('cookie-parser');
@@ -35,11 +36,14 @@ module.exports = function(app, model) {
     function localStrategy(username, password, done) {
         model
             .userModel
-            .findUserByCredentials(username, password)
+            .findUserByUsername(username)
             .then(
                 function(user) {
-                    if(!user) return done(null, false);
-                    return done(null, user);
+                    if(user && bcrypt.compareSync(password, user.password)) {
+                        return done(null, user);
+                    } else {
+                        return done(null, false);
+                    }
                 },
                 function(error) {
                     return done(error);
@@ -77,6 +81,7 @@ module.exports = function(app, model) {
 
     function register(req, res) {
         var user = req.body;
+        user.password = bcrypt.hashSync(user.password);
         model
             .userModel
             .createUser(user)
