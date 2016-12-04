@@ -30,7 +30,7 @@ module.exports = function(app, model) {
 
     app.post("/api/login", passport.authenticate('local'), login);
     app.get ('/auth/facebook', passport.authenticate('facebook', {
-        scope : ['profile', 'email'] }));
+        scope : 'email' }));
     app.get('/auth/facebook/callback', passport.authenticate('facebook', {
         successRedirect: '/#/user',failureRedirect: '/#/login'}));
     app.post("/api/checkLoggedIn", checkLoggedIn);
