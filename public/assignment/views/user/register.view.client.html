@@ -3,11 +3,28 @@
     <div ng-show="model.error" class="alert alert-danger" role="alert">
         {{model.error}}
     </div>
-    <input ng-model="model.user.username" type="text" class="form-control" placeholder="Username"/>
-    <input ng-model="model.user.password" type="password" class="form-control" placeholder="Password"/>
-    <input ng-model="model.user.confirmPassword" type="password" class="form-control" placeholder="Confirm Password"/>
-    <input type="button" class="btn user-pages-theme btn-block"
-       ng-click="model.register(model.user);" value="Register"/>
-    <input type="button" class="btn btn-danger  btn-block"
-       onclick="location.href='#/login';" value="Cancel"/>
+    <form name="registerForm" novalidate>
+        <input ng-model="model.user.username" name="username" type="text" class="form-control" placeholder="Username" required/>
+        <div>
+                <span class="alert-danger" role="alert" ng-show="registerForm.username.$touched && registerForm.username.$invalid">
+                    <span class="fa fa-exclamation-circle"></span>Username required
+                </span>
+        </div>
+        <input ng-model="model.user.password" name="password" type="password" class="form-control" placeholder="Password" required/>
+        <div>
+                <span class="alert-danger" role="alert" ng-show="registerForm.password.$touched && registerForm.password.$invalid">
+                    <span class="fa fa-exclamation-circle"></span>Password required
+                </span>
+        </div>
+        <input ng-model="model.user.confirmPassword" name="confirmPass" type="password" class="form-control" placeholder="Confirm Password" required/>
+        <div>
+                <span class="alert-danger" role="alert" ng-show="registerForm.confirmPass.$touched && registerForm.confirmPass.$invalid">
+                    <span class="fa fa-exclamation-circle"></span>Confirm Password required
+                </span>
+        </div>
+        <input type="button" class="btn user-pages-theme btn-block"
+           ng-click="model.register(model.user);" value="Register"/>
+        <input type="button" class="btn btn-danger  btn-block"
+           onclick="location.href='#/login';" value="Cancel"/>
+    </form>
 </div>

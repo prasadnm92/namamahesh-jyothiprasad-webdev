@@ -3,9 +3,19 @@
     <div ng-show="model.error" class="alert alert-danger" role="alert">
         {{model.error}}
     </div>
-    <form>
-        <input ng-model="model.user.username" type="text" class="form-control" placeholder="Username"/>
-        <input ng-model="model.user.password" type="password" class="form-control" placeholder="Password"/>
+    <form name="loginForm" novalidate>
+        <input ng-model="model.user.username" name="username" type="text" class="form-control" placeholder="Username" required/>
+        <div>
+            <span class="alert-danger" role="alert" ng-show="loginForm.username.$touched && loginForm.username.$invalid">
+                <span class="fa fa-exclamation-circle"></span>Username required
+            </span>
+        </div>
+        <input ng-model="model.user.password" name="password" type="password" class="form-control" placeholder="Password" required/>
+        <div>
+            <span class="alert-danger" role="alert" ng-show="loginForm.password.$touched && loginForm.password.$invalid">
+                <span class="fa fa-exclamation-circle">Password required
+            </span>
+        </div>
         <input type="button" class="btn user-pages-theme btn-block" value="Login"
            ng-click="model.login(model.user.username, model.user.password);"/>
         <input type="button" class="btn btn-success btn-block" onclick="location.href='#/register';" value="Register"/>
