@@ -9,6 +9,7 @@
     function UserService($http) {
         var api = {
             register                : register,
+            findCurrentUser         : findCurrentUser,
             findUserById            : findUserById,
             findUserByUsername      : findUserByUsername,
             findUserByCredentials   : findUserByCredentials,
@@ -42,6 +43,10 @@
                 password: user.password
             };
             return $http.post("/api/register",user);
+        }
+
+        function findCurrentUser() {
+            return $http.get("/api/user");
         }
 
         function findUserById(userId) {

@@ -19,7 +19,7 @@
                 UserService
                     .login(username, password)
                     .success(function(user) {
-                        if(user) $location.url("/user/" + user._id);
+                        if(user) $location.url("/user/");
                         else vm.error = "Username or Password does not match";
                     })
                     .error(function(err) {
@@ -44,7 +44,7 @@
                     .success(function(user) {
                         if(user) {
                             $rootScope.currentUser = user;
-                            $location.url("/user/"+user._id);
+                            $location.url("/user/");
                         }
                         else vm.error = "Username already exists";
                     })
@@ -62,9 +62,8 @@
         vm.logout = logout;
 
         function init() {
-            vm.userId = $routeParams.uid;
             UserService
-                .findUserById(vm.userId)
+                .findCurrentUser()
                 .success(function(user) {
                     if(user) vm.user = user;
                 })

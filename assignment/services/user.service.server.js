@@ -11,7 +11,8 @@ module.exports = function(app, model) {
     var facebookConfig = {
         clientID     : "1812306868982232",
         clientSecret : "30cb22d7d4705d27b95d8367b83a9d98",
-        callbackURL  : "http://localhost:3000/auth/facebook/callback"
+        callbackURL  : "http://localhost:3000/auth/facebook/callback",
+        profileFields: ['emails','name','displayName']
     };
 
     app.use(session({
@@ -29,10 +30,9 @@ module.exports = function(app, model) {
     passport.deserializeUser(deserializeUser);
 
     app.post("/api/login", passport.authenticate('local'), login);
-    app.get ('/auth/facebook', passport.authenticate('facebook', {
-        scope : 'email' }));
+    app.get ('/auth/facebook', passport.authenticate('facebook'));
     app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-        successRedirect: '/#/user',failureRedirect: '/#/login'}));
+        successRedirect: '/assignment/#/user',failureRedirect: '/assignment/#/login'}));
     app.post("/api/checkLoggedIn", checkLoggedIn);
     app.post("/api/logout", logout);
     app.post("/api/register", register);
@@ -50,7 +50,6 @@ module.exports = function(app, model) {
                     if(user) {
                         return done(null, user);
                     } else {
-                        console.dir(profile);
                         var email = profile.emails[0].value;
                         var emailParts = email.split("@");
                         var newFacebookUser = {
@@ -154,6 +153,8 @@ module.exports = function(app, model) {
         if(req.query.username) {
             if(req.query.password) findUserByCredentials(req, res);
             else findUserByUsername(req, res);
+        } else {
+            res.send(req.user);
         }
     }
 
