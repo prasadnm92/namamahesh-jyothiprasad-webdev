@@ -13,11 +13,14 @@
         <input ng-model="model.user.password" name="password" type="password" class="form-control" placeholder="Password" required/>
         <div>
             <span class="alert-danger" role="alert" ng-show="loginForm.password.$touched && loginForm.password.$invalid">
-                <span class="fa fa-exclamation-circle">Password required
+                <span class="fa fa-exclamation-circle"></span>Password required
             </span>
         </div>
         <input type="button" class="btn user-pages-theme btn-block" value="Login"
            ng-click="model.login(model.user.username, model.user.password);"/>
         <input type="button" class="btn btn-success btn-block" onclick="location.href='#/register';" value="Register"/>
+        <a href="/auth/facebook" class="btn btn-primary btn-block">
+            <span class="fa fa-facebook"></span>Facebook
+        </a>
     </form>
 </div>

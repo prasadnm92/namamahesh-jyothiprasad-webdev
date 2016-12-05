@@ -10,9 +10,9 @@ module.exports = function(app, model) {
     var cookieParser = require('cookie-parser');
     var session = require('express-session');
     var facebookConfig = {
-        clientID     : "1812306868982232",
-        clientSecret : "30cb22d7d4705d27b95d8367b83a9d98",
-        callbackURL  : "http://localhost:3000/auth/facebook/callback",
+        clientID     : process.env.FACEBOOK_CLIENT_ID,
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL,
         profileFields: ['emails','name','displayName']
     };
 
