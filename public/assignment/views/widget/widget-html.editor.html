@@ -1,5 +1,14 @@
 <div class="container">
-    <form>
+    <form name="widgetEditForm">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" name="name" ng-model="model.widget.name" id="name" placeholder="Widget name" required>
+            <div>
+                <span class="alert-danger" role="alert" ng-show="widgetEditForm.name.$touched && widgetEditForm.name.$invalid">
+                    <span class="fa fa-exclamation-circle"></span>Name required
+                </span>
+            </div>
+        </div>
         <div class="form-group">
             <label for="text">Text</label>
             <div ng-model="model.widget.text" text-angular

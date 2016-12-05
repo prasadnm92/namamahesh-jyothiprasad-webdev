@@ -51,10 +51,15 @@
             <div ng-show="model.error" class="alert alert-danger" role="alert">
                 {{model.error}}
             </div>
-            <form>
+            <form name="pageNewForm">
                 <div class="form-group">
                     <label for="page-name">Name</label>
-                    <input type="text" ng-model="model.page.name" class="form-control" id="page-name" placeholder="Page name" value="Blog post">
+                    <input type="text" ng-model="model.page.name" name="name" class="form-control" id="page-name" placeholder="Page name" required>
+                    <div>
+                        <span class="alert-danger" role="alert" ng-show="pageNewForm.name.$touched && pageNewForm.name.$invalid">
+                            <span class="fa fa-exclamation-circle"></span>Name required
+                        </span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="page-title">Title</label>
