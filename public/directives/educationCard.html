@@ -14,7 +14,33 @@
         </md-card-title-media>
     </md-card-title>
     <md-card-actions layout="row" layout-align="end center">
-        <md-button>Relevant Courses</md-button>
-        <md-button>Awards</md-button>
+        <md-button class="md-primary md-raised" ng-click="showPrerenderedDialog('#'+education.relevantCourses.id)" ng-if="education.relevantCourses">
+            Relevant Courses
+        </md-button>
+        <md-button class="md-primary md-raised" ng-click="showPrerenderedDialog('#'+education.awards.id)" ng-if="education.awards">
+            Awards
+        </md-button>
+        <div style="visibility: hidden">
+            <div class="md-dialog-container education-dialog-container" id="{{education.relevantCourses.id}}" layout="row" layout-align="center center">
+                <md-dialog class="education-dialog all-rounded-corners" flex-xs="60" flex-gt-sm="30">
+                    <md-list class="md-hue-2">
+                        <md-list-item ng-repeat="course in education.relevantCourses.data">
+                            <span class="fa fa-book"> {{course}}</span>
+                        </md-list-item>
+                    </md-list>
+                </md-dialog>
+            </div>
+        </div>
+        <div style="visibility: hidden">
+            <div class="md-dialog-container education-dialog-container" id="{{education.awards.id}}" layout="row" layout-align="center center">
+                <md-dialog class="education-dialog all-rounded-corners" flex-xs="60" flex-gt-sm="30">
+                    <md-list class="md-hue-2">
+                        <md-list-item ng-repeat="award in education.awards.data">
+                            <span class="fa fa-trophy"> {{award}}</span>
+                        </md-list-item>
+                    </md-list>
+                </md-dialog>
+            </div>
+        </div>
     </md-card-actions>
 </md-card>

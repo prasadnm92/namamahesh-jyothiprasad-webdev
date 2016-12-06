@@ -136,3 +136,13 @@ section {
     color: black;
     text-align: right;
 }
+
+.education-dialog {
+    min-height: 40vh;
+    min-width: 30vw;
+}
+
+.education-dialog-container {
+    z-index: 1000;
+    background-color:rgba(0, 0, 0, 0.5);
+}

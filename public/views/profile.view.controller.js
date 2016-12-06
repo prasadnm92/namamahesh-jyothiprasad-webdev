@@ -3,7 +3,7 @@
         .module("MyProfile")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController() {
+    function ProfileController($scope, $mdDialog) {
         var vm=this;
 
         function init(){
@@ -35,12 +35,27 @@
                 {
                     university: "Northeastern University",
                     degree: "Master of Science in Computer Science",
-                    logo: "neu.png"
+                    logo: "neu.png",
+                    relevantCourses: {
+                        id: "edu1courses",
+                        data: ["Web Development", "Information retrieval", "Algorithms", "Database Management Systems",
+                            "Computer Networks", "Network Security"]
+                    }
                 },
                 {
                     university: "Visvesvaraya Institute Of Technology",
                     degree: "Bachelor of Engineering in Computer Science",
-                    logo: "bit.png"
+                    logo: "bit.png",
+                    relevantCourses: {
+                        id: "edu2courses",
+                        data: ["Data Structures", "Design and Analysis of Algorithms", "Introduction to Databases",
+                        "Discrete Mathematical Structures", "Programming the Web", "Java and J2EE", "Information and Network Security"]
+                    },
+                    awards: {
+                        id: "edu2awards",
+                        data: ["Second Best Paper at 8th National Conference on 'Recent Trends in Computer Science and Engineering'",
+                            "Official Record Holder in INDIA BOOK OF RECORDS (and more) for participating in the Largest and Longest Information Security marathon globally"]
+                    }
                 }
             ];
             vm.projects = [
