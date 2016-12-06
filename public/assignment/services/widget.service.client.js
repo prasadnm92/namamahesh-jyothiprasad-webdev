@@ -28,15 +28,10 @@
         return api;
 
         function createWidget(pageId, widget) {
-            for(var w in widgets) {
-                if(widgets[w].pageId === pageId) {
-                    widget.pageId = pageId;
-                    widget._id = new Date().getTime().toString();
-                    widgets.push(widget);
-                    return widget._id;
-                }
-            }
-            return undefined;
+            widget.pageId = pageId;
+            widget._id = new Date().getTime().toString();
+            widgets.push(widget);
+            return widget._id;
         }
 
         function findWidgetsByPageId(pageId) {
