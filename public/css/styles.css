@@ -66,6 +66,10 @@ a.project-title {
     text-decoration: none !important;
     color: inherit;
     cursor: pointer;
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis !important;
 }
 
 .profile-image {

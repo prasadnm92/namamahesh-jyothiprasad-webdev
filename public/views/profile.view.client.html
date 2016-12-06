@@ -47,9 +47,9 @@
                     <md-toolbar class="rounded-corners">
                         <div class="md-toolbar-tools">PROJECTS</div>
                     </md-toolbar>
-                    <md-content layout-xs="column" layout="row" layout-wrap flex>
+                    <md-content layout-xs="column" layout="row" flex style="overflow-x: scroll">
                         <div flex-xs flex-gt-xs="25" ng-repeat="project in model.projects">
-                            <project-card project="project"></project-card>
+                            <project-card project="project" flex></project-card>
                         </div>
                     </md-content>
                 </div>
@@ -79,6 +79,7 @@
                 </div>
             </md-whiteframe>
         </div>
+
         <div class="footer">Copyright &copy; {{model.currentYear}} Jyothi Prasad Nama Mahesh</div>
     </md-content>
 </div>

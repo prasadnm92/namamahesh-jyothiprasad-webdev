@@ -14,8 +14,8 @@
                     position: "Software Engineer Co-op",
                     duration: "Jan. - Sept. 2016",
                     tasks: [
-                        "Developed drivers in Node.js to on-board new lab instruments to the cloud platform",
-                        "Owned the project to partner with a new manufacturer to design and develop the end-to- end functionality of on-boarding their product, being the point of contact between the customer and the developing team",
+                        "Worked with the business team and the client to integrate new instruments with the cloud platform",
+                        "Owned the project to partner with a new manufacturer to design and develop the end-to-end functionality of on-boarding their product, being the point of contact between the customer and the developing team",
                         "Performed rigorous testing on the proprietary hardware module by testing and building test frameworks on Atlassian’s TestRail",
                         "Improved development environment by configuring and setting up Vagrant for Linux environment",
                         "Increased the data capture rate and thus the efficiency of the firmware software by reducing the latency by 25%"
@@ -23,11 +23,29 @@
                 },
                 {
                     company: "Indian Institute of Science",
-                    position: "Software Engineer Intern",
+                    position: "Research Intern",
                     duration: "Apr. - July 2014",
                     tasks: [
                         "Achieved an efficient and lightweight program for remote temperature sensing with Raspberry Pi running python and sqlite3",
                         "Accomplished project completion 2 weeks before deadline by collaborating with the on-site team"
+                    ]
+                },
+                {
+                    company: "Sharp Software Development India",
+                    position: "Software Engineer Intern",
+                    duration: "Jan. - Feb. 2013",
+                    tasks: [
+                        "A first hand experience at the current technologies like the Surface computing systems",
+                        "Developed object recognition (and comparison) applications, file transfer through Bluetooth® technology using C#/.NET"
+                    ]
+                },
+                {
+                    company: "Sunfra Technologies",
+                    position: "Software Developer Intern",
+                    duration: "Aug. - Nov. 2012",
+                    tasks: [
+                        "Integrated with the Web Development department and actively involved in an E-Commerce website development project to build an online grocery store (www.payatdoor.com)",
+                        "Responsibilities included designing the look and feel of the website using HTML, CSS and JavaScript"
                     ]
                 }
             ];
@@ -69,10 +87,43 @@
                 },
                 {
                     technology: "MEAN Stack",
+                    tech_subtitle: "",
                     tech_logo: "mean.png",
-                    name: "WorkFrom",
-                    project_logo: "",
+                    name: "Wifi Loc8r",
+                    project_logo: "wifiLoc8r.jpg",
                     link:"project/"
+                },
+                {
+                    technology: "Spring MVC",
+                    tech_subtitle: "JAVA 8",
+                    tech_logo: "spring.png",
+                    name: "Event Management System",
+                    project_logo: "ems.jpg",
+                    link:"https://github.com/prasadnm92/Event-Management-System"
+                },
+                {
+                    technology: "Python",
+                    tech_subtitle: "SOLite3",
+                    tech_logo: "sqlite_python.png",
+                    name: "Content Deliver Network",
+                    project_logo: "cdn.jpg",
+                    link:"https://github.com/prasadnm92/fundamentalsOfComputerNetworks/tree/master/Content%20Delivery%20Network"
+                },
+                {
+                    technology: "JAVA",
+                    tech_subtitle: "",
+                    tech_logo: "java.png",
+                    name: "Crawler, Ranking and Indexer",
+                    project_logo: "crawler.jpg",
+                    link:"https://github.com/prasadnm92/informationRetrieval"
+                },
+                {
+                    technology: "JAVA",
+                    tech_subtitle: "JSP, Servlets",
+                    tech_logo: "java-j2ee.jpg",
+                    name: "Virtual Hospital",
+                    project_logo: "virtual-hospital.jpg",
+                    link:"https://github.com/prasadnm92/virtualHospital"
                 }
             ];
             vm.skills = [
@@ -96,6 +147,7 @@
                         {logo:"html5.png", alt:"HTML5"},
                         {logo:"css3.png", alt:"CSS3"},
                         {logo:"jquery.jpg", alt:"jQuery"},
+                        {logo:"spring.png", alt:"Spring MVC"},
                         {logo:"bootstrap.png", alt:"Bootstrap"},
                         {logo:"express-js.png", alt:"Express JS"},
                         {logo:"restful-api.png", alt:"RESTful API"}
