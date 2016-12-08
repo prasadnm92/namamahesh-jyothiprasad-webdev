@@ -61,7 +61,7 @@
                     }
                 },
                 {
-                    university: "Visvesvaraya Institute Of Technology",
+                    university: "Bangalore Institute Of Technology",
                     degree: "Bachelor of Engineering in Computer Science",
                     logo: "bit.png",
                     relevantCourses: {
