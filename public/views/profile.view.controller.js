@@ -91,7 +91,7 @@
                     tech_logo: "mean.png",
                     name: "Wifi Loc8r",
                     project_logo: "wifiLoc8r.jpg",
-                    link:"project/"
+                    link:"http://vast-fjord-43915.herokuapp.com/#/"
                 },
                 {
                     technology: "Spring MVC",
