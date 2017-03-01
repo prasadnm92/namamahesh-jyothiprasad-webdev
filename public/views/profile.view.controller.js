@@ -10,6 +10,16 @@
             vm.currentYear = (new Date()).getFullYear();
             vm.work_experience = [
                 {
+                    company: "xLM, LLC",
+                    position: "Software Developer in Test Automation",
+                    duration: "Feb. 2017",
+                    tasks: [
+                        "Developed test automation models and scripts to support Continuous Validation of cloud application systems used in GLP, GMP and GCP environments",
+                        "Designed test automation models for UI Testing, Web Service Testing, Performance Testing and Security Testing",
+                        "Produced Validation documentation that includes Specifications, Test Automation Models, Traceability Matrices, Risk Assessments and Standard Operation Procedures (SOPs)"
+                    ]
+                },
+                {
                     company: "TetraScience",
                     position: "Software Engineer Co-op",
                     duration: "Jan. - Sept. 2016",
@@ -148,6 +158,7 @@
                         {logo:"css3.png", alt:"CSS3"},
                         {logo:"jquery.jpg", alt:"jQuery"},
                         {logo:"spring.png", alt:"Spring MVC"},
+                        {logo:"rabbitmq.png", alt:"RabbitMQ"},
                         {logo:"bootstrap.png", alt:"Bootstrap"},
                         {logo:"express-js.png", alt:"Express JS"},
                         {logo:"restful-api.png", alt:"RESTful API"}
@@ -166,7 +177,7 @@
                         {logo:"mysql.png", alt:"MySQL"},
                         {logo:"oracle-11g.jpg", alt:"Oracle 11g"},
                         {logo:"mongodb.jpg", alt:"MongoDB"},
-                        {logo:"postgresql.png", alt:"PostgrSQL"},
+                        {logo:"postgresql.png", alt:"PostgreSQL"},
                         {logo:"sqlite.png", alt:"SQLite"}
                     ]
                 },
@@ -175,6 +186,9 @@
                     items: [
                         {logo:"webstorm.png", alt:"WebStorm"},
                         {logo:"netbeans.png", alt:"NetBeans"},
+                        {logo:"testOptimal.png", alt:"TestOptimal"},
+                        {logo:"selenium.png", alt:"Selenium"},
+                        {logo:"talend.jpg", alt:"Talend ETL"},
                         {logo:"eclipse.png", alt:"Eclipse"},
                         {logo:"git.png", alt:"GIT"},
                         {logo:"atlassian.png", alt:"Atlassian"},
